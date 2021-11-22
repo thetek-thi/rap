@@ -1,5 +1,20 @@
+# ignore everything
 *
+
+# unignore all files with extensions
 !*.*
+
+# unignore all dirs
+!*/
+
+# ignore .d and .o files
+*.d
 *.o
+
+# unignore makefiles
+!Makefile
+!makefile
+
+# unignore assembly run script
 !runasm
 
