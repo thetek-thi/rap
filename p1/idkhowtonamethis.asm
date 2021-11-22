@@ -31,12 +31,16 @@ main:
     call printf
     add esp, 8
 
-    ; eax <- 17-5, ebx <- 30, ebx/5
+    ; eax <- 17-5
     mov edx, 17
     sub edx, 5
+    ; ebx <- 30
     mov ebx, 30
+    ; ebx / 5
+    xor edx, edx
     mov eax, ebx
-    div dword [5]
+    mov ebx, 5
+    div ebx
 
     push eax
     push numberformat
