@@ -1,0 +1,7 @@
+#!/bin/bash
+set -e
+
+nasm -felf32 "$1.asm"
+gcc "$1.o" -o "$1"
+./"$1"
+
