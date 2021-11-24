@@ -1,42 +1,83 @@
-global  main
-
-extern  atoi
-extern  printf
+    global  main
+    
+    extern  atoi
+    extern  exit
+    extern  printf
 
 
 
 section .data
-    strf_badarg: db 'bad argument',10,0
-    strf_number: db '%10d',10,0
+    strf:   db '%d',10,0
+    eargc:  db 'Usage: `collatz <n>`',10,0
+    res:    dd 1
 
 
 
 section .text
-
 main:
-    ; argc, needs to be 2 (cmd + 1 arg)
+    ; no command line arguments -> print error and exit
     mov     eax, [esp+4]
-    cmp     eax, 2
-    jne     bad_command
+    dec     eax
+    jz      _eargc
 
-    ; argv with atoi() for argument to integer
+    ; get number from first argument in eax
     mov     eax, [esp+8]
     push    dword [eax+4]
     call    atoi
     add     esp, 4
 
-    ; TODO: actual code for collatz
+    ; call collatz function
+    mov     [res], eax
+    call    _collatz
 
-
-
-finished:
+    xor     eax, eax
     ret
 
 
 
-bad_command:
-    push    strf_badarg
+_collatz:
+    call    _printeax
+    __start:
+        mov     eax, [res]
+        shl     eax, 31
+        shr     eax, 31
+        jz      __even
+    __odd:
+        mov     eax, [res]
+        mov     edx, 3
+        mul     edx
+        inc     eax
+        mov     [res], eax
+        call    _printeax
+        jmp     __end
+    __even:
+        mov     eax, [res]
+        mov     ebx, 2
+        xor     edx, edx
+        div     ebx
+        mov     [res], eax
+        call    _printeax
+    __end:
+        mov     eax, [res]
+        dec     eax
+        jnz     __start
+    ret
+
+
+
+_printeax:
+    push    eax
+    push    strf
     call    printf
-    add     esp, 4
+    add     esp, 8
     ret
+
+
+
+_eargc:
+    push    eargc
+    call    printf
+    
+    mov     edi, 1
+    call    exit
 
