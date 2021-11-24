@@ -1,0 +1,7 @@
+#!/bin/bash
+set -e
+
+nasm -g -felf64 "$1.asm"
+gcc -g "$1.o" -o "$1"
+./"$1"
+

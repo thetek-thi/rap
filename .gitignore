@@ -17,4 +17,5 @@
 
 # unignore assembly run script
 !runasm
+!runasm64
 
