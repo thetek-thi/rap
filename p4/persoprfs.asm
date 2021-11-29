@@ -1,42 +1,49 @@
-    global  main
+	global	main
 
-    extern  exit
-    extern  printf
-
-
-
-section .data
-
-    eargcmsg: db 'Usage: `persoprfs <nummer>`',10,0
-    strf_str: db '%s',10,0
+	extern	fgets
+	extern	printf
+	extern	stdin
 
 
 
+	section	.data
 
-section .text
-
-main:
-    mov     eax, [esp+4]
-    cmp     eax, 2
-    jnz     errargc
-
-    mov     eax, [esp+8]
-
-    push    dword [eax+4]
-    push    strf_str
-    call    printf
-    add     esp, 8
-
-    ret
+prompt:	db	'perso number > ',0
+pnr:	db	0,0,0,0,0,0,0,0,0,0,0
+fmtint: db	'%c',10,0
 
 
 
-errargc:
-    push    eargcmsg
-    call    printf
-    add     esp, 4
-    
+	section	.text
 
-    mov     edi, 1
-    call    exit
+main:	push	prompt
+	call	printf
+	add	esp,	4
+
+	push	dword	[stdin]
+	push	11
+	push	pnr
+	call	fgets
+	add	esp,	12
+
+	push	pnr
+	call	printf
+	add	esp,	4
+
+	call	testpn
+
+	ret
+
+
+
+testpn:	mov	ecx,	10
+ _loop:	mov	eax,	[pnr+ecx-1]
+ 	sub	eax,	48
+	cmp	eax,	10
+	jng	_skip
+	sub	eax,	7
+ _skip:	mov	[pnr+ecx-1], eax
+ 	loop	_loop
+
+	ret
 
