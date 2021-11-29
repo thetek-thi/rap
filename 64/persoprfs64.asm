@@ -52,10 +52,5 @@ testpn:	mov	rcx,	10
  _skip:	mov	[pnr+rcx-1], rax
 	loop	_l1
 
-	mov	rcx,	9
- _l2:	mov	rax,	[pnr+rcx]
- 	mov	[pnrx+rcx*2], rax
- 	loop	_l2
-
 	ret
 
