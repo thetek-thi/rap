@@ -10,7 +10,7 @@
 
 prompt:	db	'perso number > ',0
 pnr:	db	0,0,0,0,0,0,0,0,0,0,0
-fmtint: db	'%c',10,0
+fmtint: db	'%d',10,0
 
 
 
@@ -36,14 +36,19 @@ main:	push	prompt
 
 
 
-testpn:	mov	ecx,	10
- _loop:	mov	eax,	[pnr+ecx-1]
- 	sub	eax,	48
+testpn:	xor	ecx,	ecx
+ _loop:	mov	eax,	[pnr+ecx]
+	and	eax,	0x000000FF
+
+	sub	eax,	48
 	cmp	eax,	10
-	jng	_skip
+	jl	_skip
 	sub	eax,	7
- _skip:	mov	[pnr+ecx-1], eax
- 	loop	_loop
+ _skip: mov	[pnr+ecx],	al
+
+	inc	ecx
+	cmp	ecx,	10
+	jne	_loop
 
 	ret
 
