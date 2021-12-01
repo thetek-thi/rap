@@ -49,6 +49,70 @@ testpn:	xor	ecx,	ecx
 	inc	ecx
 	cmp	ecx,	10
 	jne	_loop
+; end _loop
+
+	xor	eax,	eax
+
+
+	mov	edx,	[pnr+0]
+	shl	edx,	24
+	shr	edx,	24
+	imul	edx,	7
+	add	eax,	edx
+
+	mov	edx,	[pnr+1]
+	shl	edx,	24
+	shr	edx,	24
+	imul	edx,	3
+	add	eax,	edx
+
+	mov	edx,	[pnr+2]
+	shl	edx,	24
+	shr	edx,	24
+	add	eax,	edx
+
+
+	mov	edx,	[pnr+3]
+	shl	edx,	24
+	shr	edx,	24
+	imul	edx,	7
+	add	eax,	edx
+
+	mov	edx,	[pnr+4]
+	shl	edx,	24
+	shr	edx,	24
+	imul	edx,	3
+	add	eax,	edx
+
+	mov	edx,	[pnr+5]
+	shl	edx,	24
+	shr	edx,	24
+	add	eax,	edx
+	
+
+	mov	edx,	[pnr+6]
+	shl	edx,	24
+	shr	edx,	24
+	imul	edx,	7
+	add	eax,	edx
+
+	mov	edx,	[pnr+7]
+	shl	edx,	24
+	shr	edx,	24
+	imul	edx,	3
+	add	eax,	edx
+
+	mov	edx,	[pnr+8]
+	shl	edx,	24
+	shr	edx,	24
+	add	eax,	edx
+
+
+
+	push	eax
+	push	fmtint
+	call	printf
+	add	esp,	8
 
 	ret
 
