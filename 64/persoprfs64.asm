@@ -43,14 +43,5 @@ main:	push	rbp
 
 
 
-testpn:	mov	rcx,	10
- _l1:	mov	rax,	[pnr+rcx-1]
-	sub	rax,	48
-	cmp	rax,	10
-	jng	_skip
-	sub	rax,	7
- _skip:	mov	[pnr+rcx-1], rax
-	loop	_l1
-
-	ret
+testpn:	ret
 
