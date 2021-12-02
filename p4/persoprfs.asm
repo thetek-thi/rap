@@ -26,6 +26,8 @@ main:	push	prompt
 	call	fgets
 	add	esp,	12
 
+	mov	[pnr+9],	byte ' '
+
 	push	pnr
 	call	printf
 	add	esp,	4
@@ -107,6 +109,11 @@ testpn:	xor	ecx,	ecx
 	shr	edx,	24
 	add	eax,	edx
 
+	mov	ebx,	10
+	mov	ecx,	eax
+	xor	edx,	edx
+	div	ebx
+	mov	eax,	edx
 
 
 	push	eax
