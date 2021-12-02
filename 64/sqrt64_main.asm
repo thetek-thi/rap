@@ -10,7 +10,9 @@
 	section	.data
 
 prompt:	db	'input > ',0
+badinp:	db	'please enter a number.',10,0
 fmtint:	db	'%d',0
+fmtinl:	db	'%d',10,0
 input:	dd	0
 
 
@@ -28,13 +30,22 @@ main:	push	rbp
 	call	scanf
 	pop	rbp
 
+	cmp	rax,	1
+	je	_cont
+
 	push	rbp
+	mov	rdi,	badinp
+	call	printf
+	pop	rbp
+	ret
+
+ _cont:	push	rbp
 	mov	rdi,	input
 	call	isqrt
 	pop	rbp
 
 	push	rbp
-	mov	rdi,	fmtint
+	mov	rdi,	fmtinl
 	mov	rsi,	rax
 	call	printf
 	pop	rbp
