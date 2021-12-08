@@ -41,6 +41,7 @@ main:   ; print input prompt
 
 	call	testpn
 
+	xor	rax,	rax
 	ret
 
 

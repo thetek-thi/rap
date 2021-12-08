@@ -40,6 +40,8 @@ main:	; print input prompt
 	mov	rdi,	badinp
 	call	printf
 	pop	rbp
+
+	mov	rax,	1
 	ret
 
  _cont:
@@ -56,5 +58,6 @@ main:	; print input prompt
 	call	printf
 	pop	rbp
 
+	xor	rax,	rax
 	ret
 
