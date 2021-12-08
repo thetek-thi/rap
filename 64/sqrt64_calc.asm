@@ -13,7 +13,8 @@ isqrt:	; arguments: input (in rdi)
 	mov	rax,	[rdi]
 	mov	[lastn],	rax
 
- _loop:	mov	rax,	[rdi]
+ _loop:	; approximate the integer square root
+ 	mov	rax,	[rdi]
 	mov	rbx,	[lastn]
 	xor	rdx,	rdx
 	div	rbx
